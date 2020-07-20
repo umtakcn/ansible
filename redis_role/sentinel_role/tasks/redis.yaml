@@ -3,11 +3,11 @@
   tasks:
     - name: Copy Redis file.
       copy:
-        src: /opt/files/redis-5.0.5.tar.gz
-        dest: /opt/redis-5.0.5.tar.gz
+        src: /opt/files/redis.tar.gz
+        dest: /opt/redis.tar.gz
     - name: Unzip Redis.
       unarchive:
-        src: /opt/redis-5.0.5.tar.gz
+        src: /opt/redis.tar.gz
         dest: /opt
         remote_src: yes
     - name: Create necessary folders.
@@ -22,10 +22,10 @@
           - /etc/redis/
     - name: Compile Redis.
       make:
-        chdir: /opt/redis-5.0.5
+        chdir: /opt/redis
     - name: Install Redis.
       make:
-        chdir: /opt/redis-5.0.5/src
+        chdir: /opt/redis/src
         target: install
     - name: Place redis.conf
       template:
