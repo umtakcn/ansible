@@ -1,0 +1,19 @@
+- name: Start Redis and Stunnel services.
+  hosts: all
+  tasks:
+    - name: Start Redis service.
+      service:
+        name: redis_{{ port_redis }}
+        state: started
+        enabled: yes
+    - name: Start Redis2 service.
+      service:
+        name: redis_{{ port_redis2 }}
+        state: started
+        enabled: yes
+    - name: Start Stunnel service.
+      service:
+        name: stunnel
+        state: started
+        enabled: yes
+      when: stunnel == "y"

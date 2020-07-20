@@ -1,0 +1,14 @@
+---
+tcp_backlog: 65535
+supervised: systemd
+pidfile: "/var/run/redis_{{ port_redis }}.pid"
+logfile_redis: "/var/log/redis/redis_{{ port_redis }}.log"
+dir: "/opt/redis"
+min_replicas_to_write: 1
+min_replicas_max_lag: 10
+maxclients: 300000
+maxmemory: 12gb
+maxmemory_policy: volatile-lru
+appendonly: "yes"
+appendfsync: everysec
+auth_password: 2ddd2611a23f472d977f6d9326b25648

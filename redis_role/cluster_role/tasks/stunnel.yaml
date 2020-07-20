@@ -1,0 +1,30 @@
+- name: Install Stunnel.
+  hosts: all
+  tasks:
+    - name: Copy Stunnel file.
+      copy:
+        src: /opt/files/stunnel-5.44.rpm
+        dest: /opt/stunnel-5.44.rpm
+    - name: Stunnel'ı yükle.
+      command: yum install -y /opt/stunnel-5.44.rpm
+    - name: Create necessary folders.
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: root
+        group: root
+      with_items:
+          - /etc/stunnel
+          - /etc/stunnel/certificates
+    - name: Place stunnel.conf.
+      template:
+        src: /opt/redis_role/cluster_role/templates/stunnel.conf.j2
+        dest: "{{ stunnel_conf_path }}"
+    - name: Create Stunnel service file.
+      template:
+        src: /opt/redis_role/cluster_role/templates/stunnel.service.j2
+        dest: "{{ stunnel_service_path }}"
+    - name: Copy certificates.
+      copy:
+        src: /opt/certificates/{{ cert }}
+        dest: "{{ cert_path }}"

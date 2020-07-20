@@ -1,0 +1,11 @@
+- name: Install Sentinel
+  hosts: all
+  tasks:
+    - name: Place redis-sentinel.conf.
+      template:
+        src: /opt/redis_role/sentinel_role/templates/redis-sentinel.conf.j2
+        dest: "{{ redis_sentinel_conf_path }}"
+    - name: Create Sentinel service file.
+      template:
+        src: /opt/redis_role/sentinel_role/templates/redis-sentinel.service.j2
+        dest: "{{ redis_sentinel_service_path }}"

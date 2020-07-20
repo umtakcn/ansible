@@ -1,0 +1,49 @@
+- name: Install Redis
+  hosts: all
+  tasks:
+    - name: Copy Redis file.
+      copy:
+        src: /opt/files/redis-5.0.5.tar.gz
+        dest: /opt/redis-5.0.5.tar.gz
+    - name: Unzip Redis.
+      unarchive:
+        src: /opt/redis-5.0.5.tar.gz
+        dest: /opt
+        remote_src: yes
+    - name: Create necessary folders.
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: root
+        group: root
+      with_items:
+          - /var/log/redis/
+          - /opt/redis/
+          - /etc/redis/
+    - name: Compile Redis.
+      make:
+        chdir: /opt/redis-5.0.5
+    - name: Install Redis.
+      make:
+        chdir: /opt/redis-5.0.5/src
+        target: install
+    - name: Place redis.conf (1)
+      template:
+        src: /opt/redis_role/cluster_role/templates/redis.conf.j2
+        dest: "{{ redis_conf_path }}"
+    - name: Place redis.conf (2)
+      template:
+        src: /opt/redis_role/cluster_role/templates/redis2.conf.j2
+        dest: "{{ redis_conf_path2 }}"
+    - name: Create Redis service file. (1)
+      template:
+        src: /opt/redis_role/cluster_role/templates/redis.service.j2
+        dest: "{{ redis_service_path }}"
+    - name: Create Redis service file. (2)
+      template:
+        src: /opt/redis_role/cluster_role/templates/redis2.service.j2
+        dest: "{{ redis_service_path2 }}"
+    - name: Place redis-shutdown.conf.
+      template:
+        src: /opt/redis_role/cluster_role/templates/redis-shutdown.conf.j2
+        dest: "{{ redis_shutdown_path }}"

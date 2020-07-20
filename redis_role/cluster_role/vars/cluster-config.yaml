@@ -1,0 +1,5 @@
+---
+cluster_enabled: "yes"
+cluster_config_file: nodes-{{ port_redis }}.conf
+cluster_config_file2: nodes-{{ port_redis2 }}.conf
+cluster_node_timeout: 5000

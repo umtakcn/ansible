@@ -1,0 +1,19 @@
+- name: Start Redis, Sentinel and Stunnel services.
+  hosts: all
+  tasks:
+    - name: Start Redis service.
+      service:
+        name: redis
+        state: started
+        enabled: yes
+    - name: Start Sentinel service.
+      service:
+        name: redis-sentinel
+        state: started
+        enabled: yes
+    - name: Start Stunnel service.
+      service:
+        name: stunnel
+        state: started
+        enabled: yes
+      when: stunnel == "y"

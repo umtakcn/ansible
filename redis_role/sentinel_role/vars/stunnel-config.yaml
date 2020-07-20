@@ -1,0 +1,5 @@
+---
+cert_path: "/etc/stunnel/certificates/noldor.pem"
+pid: "/var/run/stunnel.pid"
+output: "/var/log/stunnel.log"
+cert: "noldor.pem"

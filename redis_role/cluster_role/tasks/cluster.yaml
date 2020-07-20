@@ -1,0 +1,9 @@
+- name: Install Cluster.
+  hosts: Master_Server
+  tasks:
+    - name: Create Cluster.
+      shell: redis-cli -a {{ auth_password }} --cluster create 127.0.0.1:6101 127.0.0.1:6201 127.0.0.1:6102 127.0.0.1:6202 127.0.0.1:6103 127.0.0.1:6203 --cluster-replicas 1 --cluster-yes
+      when: stunnel == "y"
+    - name: Create Cluster.
+      shell: redis-cli -a {{ auth_password }} --cluster create {{ master_ip }}:6101 {{ master_ip }}:6201 {{ slave1_ip }}:6102 {{ slave1_ip }}:6202 {{ slave2_ip }}:6103 {{ slave2_ip }}:6203 --cluster-replicas 1 --cluster-yes
+      when: stunnel == "n"

@@ -1,0 +1,169 @@
+Master ansible_host=10.00.00.00 ansible_ssh_pass=
+Slave1 ansible_host=10.00.00.00 ansible_ssh_pass=
+Slave2 ansible_host=10.00.00.00 ansible_ssh_pass=
+
+[Master_Server]
+Master
+
+[Master_Server:vars]
+bind={{ master_ip }}
+
+port_redis=6101
+port_redis2=6201
+port_sentinel=26101
+switch=#
+
+inbound_worker_accept={{ master_ip }}:6101
+inbound_worker_connect=127.0.0.1:6101
+
+inbound_worker_acceptC={{ master_ip }}:6201
+inbound_worker_connectC=127.0.0.1:6201
+
+inbound_gossip_accept={{ master_ip }}:26101
+inbound_gossip_connect=127.0.0.1:26101
+
+inbound_gossip_acceptC={{ master_ip }}:16101
+inbound_gossip_connectC=127.0.0.1:16101
+
+inbound_gossip_acceptC2={{ master_ip }}:16201
+inbound_gossip_connectC2=127.0.0.1:16201
+
+outbound_worker_accept=127.0.0.1:6102
+outbound_worker_connect={{ slave1_ip }}:6102
+
+outbound_worker_acceptC=127.0.0.1:6202
+outbound_worker_connectC={{ slave1_ip }}:6202
+
+outbound_worker_accept2=127.0.0.1:6103
+outbond_worker_connect2={{ slave2_ip }}:6103
+
+outbound_worker_acceptC2=127.0.0.1:6203
+outbond_worker_connectC2={{ slave2_ip }}:6203
+
+outbound_gossip_accept=127.0.0.1:26102
+outbound_gossip_connect={{ slave1_ip }}:26102
+
+outbound_gossip_acceptC=127.0.0.1:16102
+outbound_gossip_connectC={{ slave1_ip }}:16102
+
+outbound_gossip_acceptC2=127.0.0.1:16202
+outbound_gossip_connectC2={{ slave1_ip }}:16202
+
+outbound_gossip_accept2=127.0.0.1:26103
+outbound_gossip_connect2={{ slave2_ip }}:26103
+
+outbound_gossip_acceptC3=127.0.0.1:16103
+outbound_gossip_connectC3={{ slave2_ip }}:16103
+
+outbound_gossip_acceptC4=127.0.0.1:16203
+outbound_gossip_connectC4={{ slave2_ip }}:16203
+
+[Slave1_Server]
+Slave1
+
+[Slave1_Server:vars]
+bind={{ slave1_ip }}
+port_redis=6102
+port_redis2=6202
+port_sentinel=26102
+switch=
+
+inbound_worker_accept={{ slave1_ip }}:6102
+inbound_worker_connect=127.0.0.1:6102
+
+inbound_worker_acceptC={{ slave1_ip }}:6202
+inbound_worker_connectC=127.0.0.1:6202
+
+inbound_gossip_accept={{ slave1_ip }}:26102
+inbound_gossip_connect=127.0.0.1:26102
+
+inbound_gossip_acceptC={{ slave1_ip }}:16102
+inbound_gossip_connectC=127.0.0.1:16102
+
+inbound_gossip_acceptC2={{ slave1_ip }}:16202
+inbound_gossip_connectC2=127.0.0.1:16202
+
+outbound_worker_accept=127.0.0.1:6103
+outbound_worker_connect={{ slave2_ip }}:6103
+
+outbound_worker_acceptC=127.0.0.1:6203
+outbound_worker_connectC={{ slave2_ip }}:6203
+
+outbound_worker_accept2=127.0.0.1:6101
+outbond_worker_connect2={{ master_ip }}:6101
+
+outbound_worker_acceptC2=127.0.0.1:6201
+outbond_worker_connectC2={{ master_ip }}:6201
+
+outbound_gossip_accept=127.0.0.1:26103
+outbound_gossip_connect={{ slave2_ip }}:26103
+
+outbound_gossip_acceptC=127.0.0.1:16103
+outbound_gossip_connectC={{ slave2_ip }}:16103
+
+outbound_gossip_acceptC2=127.0.0.1:16203
+outbound_gossip_connectC2={{ slave2_ip }}:16203
+
+outbound_gossip_accept2=127.0.0.1:26101
+outbound_gossip_connect2={{ master_ip }}:26101
+
+outbound_gossip_acceptC3=127.0.0.1:16101
+outbound_gossip_connectC3={{ master_ip }}:16101
+
+outbound_gossip_acceptC4=127.0.0.1:16201
+outbound_gossip_connectC4={{ master_ip }}:16201
+
+[Slave2_Server]
+Slave2
+
+[Slave2_Server:vars]
+bind={{ slave2_ip }}
+port_redis=6103
+port_redis2=6203
+port_sentinel=26103
+switch=
+
+inbound_worker_accept={{ slave2_ip }}:6103
+inbound_worker_connect=127.0.0.1:6103
+
+inbound_worker_acceptC={{ slave2_ip }}:6203
+inbound_worker_connectC=127.0.0.1:6203
+
+inbound_gossip_accept={{ slave2_ip }}:26103
+inbound_gossip_connect=127.0.0.1:26103
+
+inbound_gossip_acceptC={{ slave2_ip }}:16103
+inbound_gossip_connectC=127.0.0.1:16103
+
+inbound_gossip_acceptC2={{ slave2_ip }}:16203
+inbound_gossip_connectC2=127.0.0.1:16203
+
+outbound_worker_accept=127.0.0.1:6101
+outbound_worker_connect={{ master_ip }}:6101
+
+outbound_worker_acceptC=127.0.0.1:6201
+outbound_worker_connectC={{ master_ip }}:6201
+
+outbound_worker_accept2=127.0.0.1:6102
+outbond_worker_connect2={{ slave1_ip }}:6102
+
+outbound_worker_acceptC2=127.0.0.1:6202
+outbond_worker_connectC2={{ slave1_ip }}:6202
+
+outbound_gossip_accept=127.0.0.1:26101
+outbound_gossip_connect={{ master_ip }}:26101
+
+outbound_gossip_acceptC=127.0.0.1:16101
+outbound_gossip_connectC={{ master_ip }}:16101
+
+outbound_gossip_acceptC2=127.0.0.1:16201
+outbound_gossip_connectC2={{ master_ip }}:16201
+
+outbound_gossip_accept2=127.0.0.1:26102
+outbound_gossip_connect2={{ slave1_ip }}:26102
+
+outbound_gossip_acceptC3=127.0.0.1:16102
+outbound_gossip_connectC3={{ slave1_ip }}:16102
+
+outbound_gossip_acceptC4=127.0.0.1:16202
+outbound_gossip_connectC4={{ slave1_ip }}:16202

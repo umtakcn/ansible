@@ -1,0 +1,19 @@
+- name: Check Redis
+  hosts: Master_Server
+  tasks:
+    - name: Check.
+      shell: redis-cli -h 127.0.0.1 -p 26101 -a {{ auth_password }} info
+      register: result
+      when: stunnel == 'y'
+    - name: Give output.
+      debug:
+        var: result.stdout_lines
+      when: stunnel == 'y'
+    - name: Check.
+      shell: redis-cli -h {{ master_ip }} -p 26101 -a {{ auth_password }} info
+      register: result2
+      when: stunnel == 'n'
+    - name: Give output.
+      debug:
+        var: result2.stdout_lines
+      when: stunnel == 'n'

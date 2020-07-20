@@ -1,0 +1,6 @@
+---
+logfile_sentinel: "/var/log/redis/sentinel.log"
+sentinel_down_after_milliseconds_mymaster: 5000
+sentinel_failover_timeout_mymaster: 10000
+sentinel_parallel_syncs_mymaster: 2
+quorum: 2

@@ -1,0 +1,19 @@
+- name: Set operating system configurations.
+  hosts: all
+  tasks:
+    - name: Disable swapoff permanently.
+      replace:
+        path: /etc/fstab
+        regexp: "^(.*)/dev/mapper/centos-swap(.*)$"
+        replace: "#/dev/mapper/centos-swap"
+    - name: Create sysctl.conf file.
+      template:
+        src: /opt/redis_role/sentinel_role/templates/best_practices/sysctl.conf
+        dest: /etc/sysctl.conf
+    - name: Create disable-thp script.
+      template:
+        src: /opt/redis_role/sentinel_role/templates/best_practices/disable-thp
+        dest: /etc/init.d/disable-thp
+        mode: 0700
+    - name: Reload systemd.
+      command: systemctl daemon-reload

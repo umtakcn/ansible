@@ -1,0 +1,13 @@
+---
+redis_conf_path: /etc/redis/redis_{{ port_redis }}.conf
+redis_conf_path2: /etc/redis/redis_{{ port_redis2 }}.conf
+redis_service_path: /etc/systemd/system/redis_{{ port_redis }}.service
+redis_service_path2: /etc/systemd/system/redis_{{ port_redis2 }}.service
+redis_shutdown_path: /etc/redis/redis-shutdown.conf
+redis_sentinel_conf_path: /etc/redis/redis-sentinel.conf
+redis_sentinel_service_path: /usr/lib/systemd/system/redis-sentinel.service
+stunnel_conf_path: /etc/stunnel/stunnel.conf
+stunnel_service_path: /usr/lib/systemd/system/stunnel.service
+master_ip: 10.00.00.00
+slave1_ip: 10.00.00.00
+slave2_ip: 10.00.00.00

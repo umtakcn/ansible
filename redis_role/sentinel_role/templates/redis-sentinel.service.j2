@@ -1,0 +1,16 @@
+[Unit]
+Description=Redis Sentinel
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/redis-sentinel /etc/redis/redis-sentinel.conf --supervised systemd
+ExecStop=/usr/local/bin/redis-cli -p 26001 shutdown
+Type=notify
+User=root
+Group=root
+RuntimeDirectory=redis
+RuntimeDirectoryMode=0755
+LimitNOFILE=300000
+
+[Install]
+WantedBy=multi-user.target

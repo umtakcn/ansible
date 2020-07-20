@@ -1,0 +1,20 @@
+[Unit]
+Description=Redis icin SSL Tunel
+After=network.target
+After=syslog.target
+
+[Install]
+WantedBy=multi-user.target
+Alias=stunnel.target
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/stunnel /etc/stunnel/stunnel.conf
+ExecStop=/usr/bin/pkill stunnel
+LimitNOFILE=300000
+
+# Ping'e yanit alinmazsa vazgec
+TimeoutSec=600
+
+Restart=always
+PrivateTmp=false

@@ -1,0 +1,27 @@
+- name: Install Redis.
+  hosts: all
+  pre_tasks:
+   - pause:
+      prompt: "Do you wish to install Redis Cluster or Sentinel? (c|s)"
+     register: prompt
+     no_log: yes
+     run_once: yes
+   - set_fact:
+      redis_yapisi: "{{ prompt.user_input }}"
+     no_log: yes
+     run_once: yes
+   - pause:
+      prompt: "Do you wish to use Stunnel? (y|n)"
+     register: prompt
+     no_log: yes
+     run_once: yes
+   - set_fact:
+      stunnel: "{{ prompt.user_input }}"
+     no_log: yes
+     run_once: yes
+- name: Import cluster playbook.
+  import_playbook: cluster_role/main.yaml
+  when: redis_yapisi == "c"
+- name: Install sentinel playbook.
+  import_playbook: sentinel_role/main.yaml
+  when: redis_yapisi == "s"

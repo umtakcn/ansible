@@ -1,0 +1,15 @@
+- name: Install Redis Cluster.
+  hosts: all
+  tasks:
+   - name: Import variables.
+     include_vars:
+      dir: vars
+      extensions:
+       - yaml
+- import_playbook: tasks/redis.yaml
+- import_playbook: tasks/stunnel.yaml
+  when: stunnel == "y"
+- import_playbook: tasks/services.yaml
+- import_playbook: tasks/best_practices.yaml
+- import_playbook: tasks/cluster.yaml
+- import_playbook: tasks/check.yaml
