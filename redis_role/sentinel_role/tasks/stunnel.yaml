@@ -3,10 +3,10 @@
   tasks:
     - name: Copy Stunnel file.
       copy:
-        src: /opt/files/stunnel-5.44.rpm
-        dest: /opt/stunnel-5.44.rpm
+        src: /opt/files/stunnel.rpm
+        dest: /opt/stunnel.rpm
     - name: Install Stunnel
-      command: yum install -y /opt/stunnel-5.44.rpm
+      command: yum install -y /opt/stunnel.rpm
     - name: Create necessary folders.
       file:
         path: "{{ item }}"
