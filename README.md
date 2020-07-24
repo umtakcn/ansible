@@ -1,4 +1,4 @@
-Redis Cluster and Sentinel Playbook with Stunnel Option.
+Redis cluster and sentinel with Stunnel option installation playbook
 
 You can install Redis Cluster or Sentinel with or without Stunnel via this Ansible role.
 
